@@ -31,4 +31,23 @@ class StoreTest {
     void cannotRemoveMoreThanExists() {
         assertThrows(IllegalArgumentException.class, () -> store.removeFromStorage(ProductType.WATER, 1000));
     }
+    @Test
+    void buy() {
+        ShoppingCart cart = new ShoppingCart();
+        cart.addToCart(ProductType.BREAD, 5);
+        cart.addToCart(ProductType.WATER, 10);
+
+        assertTrue(store.buy(cart));
+
+        assertEquals(195, store.getAmountOf(ProductType.BREAD));
+        assertEquals(90, store.getAmountOf(ProductType.WATER));
+
+        cart.addToCart(ProductType.FLOUR, 500);
+
+        assertFalse(store.buy(cart));
+
+        assertEquals(195, store.getAmountOf(ProductType.BREAD));
+        assertEquals(90, store.getAmountOf(ProductType.WATER));
+        assertEquals(300, store.getAmountOf(ProductType.FLOUR));
+    }
 }

@@ -47,7 +47,7 @@ class Store {
         }
     }
 
-    public boolean buy(ShoppingCart shoppingCart) {
+    public synchronized boolean buy(ShoppingCart shoppingCart) {
         lock.lock();
         try {
             Map<ProductType, Integer> cartItems = shoppingCart.getCartItems();
@@ -59,7 +59,8 @@ class Store {
 
                 if (currentStock < quantityInCart) {
                     System.out.println("Not enough stock for " + item + ". Purchase aborted.");
-                    return true; // Если не хватает запасов, прекратить операцию
+                    return false; // Если не хватает запасов, прекратить
+                    // операцию
                     // покупки
                 }
             }
@@ -74,7 +75,7 @@ class Store {
             }
 
             shoppingCart.getCartItems().clear(); // Очищаем корзину после успешной покупки
-            return false;
+            return true;
         } finally {
             lock.unlock();
         }
