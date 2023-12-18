@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
 
 class ShoppingCart {
     private final Map<ProductType, Integer> cart;
@@ -31,4 +32,5 @@ class ShoppingCart {
     public Map<ProductType, Integer> getCartItems() {
         return new HashMap<>(cart);
     }
+
 }
