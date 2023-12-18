@@ -79,4 +79,11 @@ class Store {
             lock.unlock();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Store{" +
+                "stock=" + stock +
+                '}';
+    }
 }

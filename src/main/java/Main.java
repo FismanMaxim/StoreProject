@@ -1,3 +1,7 @@
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,5 +32,16 @@ public class Main {
 
         System.out.println("After shopping:");
         store.displayStock();
+        saveStoreStateToFile(store, "store_state.txt");
+    }
+
+    private static void saveStoreStateToFile(Store store, String filePath) {
+        try {
+            Path path = Path.of(filePath);
+            Files.write(path, ("Final Store State:\n" + store.toString()).getBytes(), StandardOpenOption.CREATE);
+            System.out.println("Store state saved to: " + path.toAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
