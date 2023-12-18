@@ -21,9 +21,8 @@ class User implements Runnable {
         System.out.println(name + " started shopping.");
         addToCart(ProductType.BREAD, 1);
         addToCart(ProductType.WATER, 2);
-        store.addToCart(ProductType.BREAD, 2);
-        store.addToCart(ProductType.WATER, 5);
-        store.addToCart(ProductType.FLOUR, 1);
+        addToCart(ProductType.FLOUR, 2);
+        store.buy(cart);
         store.displayStock();
     }
 }
